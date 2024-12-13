@@ -2,20 +2,50 @@ import { Link } from 'react-router-dom';
 import './Login.css';
 import { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Import eye icons from react-icons
+import { toast } from 'react-toastify'; // Import toast
+import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for toast notifications
+import { ToastContainer } from 'react-toastify';
 
 export default function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
 
+    // Initialize the toast notifications
+    const notify = (message) => toast.error(message);
+
     // Handle form submission
-    function submit() {
-        // In a real app, you'd send these to your backend for authentication
-        console.log(username, password);
+    async function submit() {
+        const userData = { username: username, pass: password };
+
+        try {
+            const response = await fetch('http://localhost:5000/signUp/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData),
+            });
+
+            const res = await response.text(); // Parse the response as JSON
+   
+            if (res !== "dokay") { 
+                
+                notify('Invalid credentials, please try again'); // Show toast on error
+            } else {
+                console.log('Login successful:', res);
+                // You can redirect the user, save tokens, or any other action on success
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
+            notify('An error occurred. Please try again later.'); // Show error toast if the request fails
+        }
     }
 
     return (
         <div className='outerDiv'>
+            <ToastContainer />
+
             <div className="formsDiv">
                 <span className='heading'>Login</span>
 
@@ -30,7 +60,7 @@ export default function LoginPage() {
                 {/* Controlled input for password */}
                 <div className="passwordInputWrapper">
                     <input
-                        type={showPassword ? "password" : "text" } // Toggle between password and text
+                        type={showPassword ? "text" : "password"} // Toggle between password and text
                         placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
