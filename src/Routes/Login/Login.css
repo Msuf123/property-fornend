@@ -1,0 +1,71 @@
+/* Login.css */
+.outerDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.formsDiv {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+input {
+    width: max-content;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color:white;
+    color: rgb(94, 94, 255);
+    border: 2px solid rgb(94, 94, 255) ;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color:rgb(94, 94, 255);
+    color: white;
+}
+
+.desc {
+    font-size: 14px;
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+/* Wrapper for password input and eye icon */
+.passwordInputWrapper {
+    position: relative;
+}
+
+/* Style for the eye icon */
+.eyeIcon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
