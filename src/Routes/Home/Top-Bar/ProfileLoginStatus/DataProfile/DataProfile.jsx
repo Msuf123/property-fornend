@@ -7,7 +7,7 @@ import { useEffect } from "react"
 export default function DataProfile(){
     const userData=useSelector(loggedInStatus)
     useEffect(()=>{
-        console.log(userData)
+        console.log(userData,'Logger stastus')
     })
     return userData?<UserData></UserData>:<NoData></NoData>
 }

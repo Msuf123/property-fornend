@@ -4,11 +4,11 @@ export const checkLoggedInStatus = createAsyncThunk(
   'loggedInStatus/checkLoggedInStatus',
   async (arg, { rejectWithValue }) => {
     try {
-      const token=localStorage.getItem('tonen')
+      const token=localStorage.getItem('token')
       if(token===null){
         throw new Error("no tokne")
       }
-      const response = await fetch('http://localhost:5000/signUp/isLoggedIN', { method: 'GET',headers:{'Authorization': 'Bearer df'} });
+      const response = await fetch('http://localhost:5000/signUp/isLoggedIN', { method: 'GET',headers:{'Authorization': 'Bearer '+token} });
      
       
     
@@ -19,7 +19,7 @@ export const checkLoggedInStatus = createAsyncThunk(
         throw new Error("no auth")
       }
       else{
-        console.log('data is ther he si logge din')
+        console.log('data is ther he si logge din',data)
         return  JSON.parse(data)
       }
         

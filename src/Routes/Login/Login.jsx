@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 import { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Import eye icons from react-icons
@@ -10,7 +10,7 @@ export default function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
-
+      const nav=useNavigate()
     // Initialize the toast notifications
     const notify = (message) => toast.error(message);
 
@@ -29,12 +29,13 @@ export default function LoginPage() {
 
             const res = await response.text(); // Parse the response as JSON
    
-            if (res !== "dokay") { 
+            if (res === "nookay") { 
                 
                 notify('Invalid credentials, please try again'); // Show toast on error
             } else {
                 console.log('Login successful:', res);
-                // You can redirect the user, save tokens, or any other action on success
+                localStorage.setItem('token',res)
+                nav('/')
             }
         } catch (error) {
             console.error('Error during login:', error);
